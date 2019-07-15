@@ -1,0 +1,65 @@
+2019-07-15 08:16:52.049291 I | etcdmain: etcd Version: 3.3.12
+2019-07-15 08:16:52.049381 I | etcdmain: Git SHA: c25e6ae0b
+2019-07-15 08:16:52.049397 I | etcdmain: Go Version: go1.10.3
+2019-07-15 08:16:52.049419 I | etcdmain: Go OS/Arch: linux/amd64
+2019-07-15 08:16:52.049438 I | etcdmain: setting maximum number of CPUs to 6, total number of available CPUs is 6
+2019-07-15 08:16:52.049650 I | embed: peerTLS: cert = /var/etcd/ssl/peer/tls.crt, key = /var/etcd/ssl/peer/tls.key, ca = , trusted-ca = /var/etcd/ssl/peer/ca.crt, client-cert-auth = true, crl-file = 
+2019-07-15 08:16:52.050221 I | embed: listening for peers on https://0.0.0.0:2380
+2019-07-15 08:16:52.050294 I | embed: listening for client requests on 0.0.0.0:2379
+2019-07-15 08:16:57.116390 I | pkg/netutil: resolving etcd3.default.svc.cluster.local:2380 to 10.107.188.168:2380
+2019-07-15 08:16:57.119933 I | pkg/netutil: resolving etcd3.default.svc.cluster.local:2380 to 10.107.188.168:2380
+2019-07-15 08:16:58.870085 I | etcdserver: name = etcd3
+2019-07-15 08:16:58.870133 I | etcdserver: data dir = /var/etcd/data/main
+2019-07-15 08:16:58.870154 I | etcdserver: member dir = /var/etcd/data/main/member
+2019-07-15 08:16:58.870171 I | etcdserver: heartbeat = 100ms
+2019-07-15 08:16:58.870190 I | etcdserver: election = 1000ms
+2019-07-15 08:16:58.870209 I | etcdserver: snapshot count = 100000
+2019-07-15 08:16:58.870232 I | etcdserver: advertise client URLs = https://etcd3.default.svc.cluster.local:2379
+2019-07-15 08:16:58.870252 I | etcdserver: initial advertise peer URLs = https://etcd3.default.svc.cluster.local:2380
+2019-07-15 08:16:58.870279 I | etcdserver: initial cluster = etcd1=https://etcd1.default.svc.cluster.local:2380,etcd2=https://etcd2.default.svc.cluster.local:2380,etcd3=https://etcd3.default.svc.cluster.local:2380
+2019-07-15 08:16:58.928826 I | etcdserver: starting member 79a5da4dbaad6721 in cluster 3c583179ce9a9924
+2019-07-15 08:16:58.928968 I | raft: 79a5da4dbaad6721 became follower at term 0
+2019-07-15 08:16:58.929357 I | raft: newRaft 79a5da4dbaad6721 [peers: [], term: 0, commit: 0, applied: 0, lastindex: 0, lastterm: 0]
+2019-07-15 08:16:58.929411 I | raft: 79a5da4dbaad6721 became follower at term 1
+2019-07-15 08:16:58.933197 W | auth: simple token is not cryptographically signed
+2019-07-15 08:16:58.939798 I | rafthttp: starting peer 6a2edc9bc157d038...
+2019-07-15 08:16:58.941207 I | rafthttp: started HTTP pipelining with peer 6a2edc9bc157d038
+2019-07-15 08:16:58.942339 I | rafthttp: started streaming with peer 6a2edc9bc157d038 (writer)
+2019-07-15 08:16:58.942686 I | rafthttp: started streaming with peer 6a2edc9bc157d038 (writer)
+2019-07-15 08:16:58.944696 I | rafthttp: started peer 6a2edc9bc157d038
+2019-07-15 08:16:58.945540 I | rafthttp: started streaming with peer 6a2edc9bc157d038 (stream MsgApp v2 reader)
+2019-07-15 08:16:58.946257 I | rafthttp: added peer 6a2edc9bc157d038
+2019-07-15 08:16:58.946384 I | rafthttp: starting peer a75ec0ab922917e2...
+2019-07-15 08:16:58.946801 I | rafthttp: started streaming with peer 6a2edc9bc157d038 (stream Message reader)
+2019-07-15 08:16:58.947058 I | rafthttp: started HTTP pipelining with peer a75ec0ab922917e2
+2019-07-15 08:16:58.952150 I | rafthttp: started streaming with peer a75ec0ab922917e2 (writer)
+2019-07-15 08:16:58.957264 I | rafthttp: started streaming with peer a75ec0ab922917e2 (writer)
+2019-07-15 08:16:58.957944 I | rafthttp: started peer a75ec0ab922917e2
+2019-07-15 08:16:58.958134 I | rafthttp: started streaming with peer a75ec0ab922917e2 (stream Message reader)
+2019-07-15 08:16:58.959342 I | rafthttp: added peer a75ec0ab922917e2
+2019-07-15 08:16:58.959425 I | etcdserver: starting server... [version: 3.3.12, cluster version: to_be_decided]
+2019-07-15 08:16:58.960610 I | rafthttp: started streaming with peer a75ec0ab922917e2 (stream MsgApp v2 reader)
+2019-07-15 08:16:58.962367 I | etcdserver/membership: added member 6a2edc9bc157d038 [https://etcd2.default.svc.cluster.local:2380] to cluster 3c583179ce9a9924
+2019-07-15 08:16:58.962564 I | etcdserver/membership: added member 79a5da4dbaad6721 [https://etcd3.default.svc.cluster.local:2380] to cluster 3c583179ce9a9924
+2019-07-15 08:16:58.962750 I | etcdserver/membership: added member a75ec0ab922917e2 [https://etcd1.default.svc.cluster.local:2380] to cluster 3c583179ce9a9924
+2019-07-15 08:16:59.019750 I | rafthttp: peer 6a2edc9bc157d038 became active
+2019-07-15 08:16:59.021575 I | rafthttp: established a TCP streaming connection with peer 6a2edc9bc157d038 (stream MsgApp v2 reader)
+2019-07-15 08:16:59.028410 I | rafthttp: established a TCP streaming connection with peer 6a2edc9bc157d038 (stream Message reader)
+2019-07-15 08:16:59.030290 I | embed: ClientTLS: cert = /var/etcd/ssl/server/tls.crt, key = /var/etcd/ssl/server/tls.key, ca = , trusted-ca = /var/etcd/ssl/server/ca.crt, client-cert-auth = true, crl-file = 
+2019-07-15 08:16:59.031158 I | rafthttp: peer a75ec0ab922917e2 became active
+2019-07-15 08:16:59.031243 I | rafthttp: established a TCP streaming connection with peer a75ec0ab922917e2 (stream MsgApp v2 writer)
+2019-07-15 08:16:59.031276 I | rafthttp: established a TCP streaming connection with peer a75ec0ab922917e2 (stream Message writer)
+2019-07-15 08:16:59.031752 I | rafthttp: established a TCP streaming connection with peer 6a2edc9bc157d038 (stream MsgApp v2 writer)
+2019-07-15 08:16:59.032303 I | rafthttp: established a TCP streaming connection with peer 6a2edc9bc157d038 (stream Message writer)
+2019-07-15 08:16:59.037648 I | rafthttp: established a TCP streaming connection with peer a75ec0ab922917e2 (stream Message reader)
+2019-07-15 08:16:59.041160 I | rafthttp: established a TCP streaming connection with peer a75ec0ab922917e2 (stream MsgApp v2 reader)
+2019-07-15 08:16:59.067818 I | etcdserver: 79a5da4dbaad6721 initialzed peer connection; fast-forwarding 8 ticks (election ticks 10) with 2 active peer(s)
+2019-07-15 08:16:59.132247 I | raft: 79a5da4dbaad6721 [term: 1] received a MsgVote message with higher term from a75ec0ab922917e2 [term: 2]
+2019-07-15 08:16:59.132316 I | raft: 79a5da4dbaad6721 became follower at term 2
+2019-07-15 08:16:59.132346 I | raft: 79a5da4dbaad6721 [logterm: 1, index: 3, vote: 0] cast MsgVote for a75ec0ab922917e2 [logterm: 1, index: 3] at term 2
+2019-07-15 08:16:59.135179 I | raft: raft.node: 79a5da4dbaad6721 elected leader a75ec0ab922917e2 at term 2
+2019-07-15 08:16:59.143874 I | etcdserver: published {Name:etcd3 ClientURLs:[https://etcd3.default.svc.cluster.local:2379]} to cluster 3c583179ce9a9924
+2019-07-15 08:16:59.145537 I | embed: ready to serve client requests
+2019-07-15 08:16:59.150639 I | embed: serving client requests on [::]:2379
+2019-07-15 08:16:59.181877 N | etcdserver/membership: set the initial cluster version to 3.3
+2019-07-15 08:16:59.181962 I | etcdserver/api: enabled capabilities for version 3.3

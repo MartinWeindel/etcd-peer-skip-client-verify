@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: etcd1
+  name: etcd1
+  namespace: default
+spec:
+  containers:
+  - command:
+    - /usr/local/bin/etcd
+    - --name=etcd1
+    - --initial-cluster-state=new
+    - --initial-cluster-token=main
+    - --initial-advertise-peer-urls=https://etcd1.default.svc.cluster.local:2380
+    - --initial-cluster=etcd1=https://etcd1.default.svc.cluster.local:2380,etcd2=https://etcd2.default.svc.cluster.local:2380,etcd3=https://etcd3.default.svc.cluster.local:2380
+    - --data-dir=/var/etcd/data/main
+    - --listen-client-urls=https://0.0.0.0:2379
+    - --listen-peer-urls=https://0.0.0.0:2380
+    - --advertise-client-urls=https://etcd1.default.svc.cluster.local:2379
+    - --peer-client-cert-auth=true
+    - --client-cert-auth=true
+    - --peer-trusted-ca-file=/var/etcd/ssl/peer/ca.crt
+    - --peer-cert-file=/var/etcd/ssl/peer/tls.crt
+    - --peer-key-file=/var/etcd/ssl/peer/tls.key
+    - --trusted-ca-file=/var/etcd/ssl/server/ca.crt
+    - --cert-file=/var/etcd/ssl/server/tls.crt
+    - --key-file=/var/etcd/ssl/server/tls.key
+    image: eu.gcr.io/gardener-project/test/multigarden-etcd:v3.3.12-dev
+    imagePullPolicy: Always
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -ec
+        - ETCDCTL_API=3
+        - etcdctl
+        - --cert=/var/etcd/ssl/client/tls.crt
+        - --key=/var/etcd/ssl/client/tls.key
+        - --cacert=/var/etcd/ssl/client/ca.crt
+        - --endpoints=https://localhost:2379
+        - get
+        - foo
+      failureThreshold: 3
+      initialDelaySeconds: 15
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: etcd
+    ports:
+    - containerPort: 2380
+      name: serverport
+      protocol: TCP
+    - containerPort: 2379
+      name: clientport
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 500Mi
+    volumeMounts:
+    - mountPath: /var/etcd/ssl/server
+      name: etcd-server-tls
+    - mountPath: /var/etcd/ssl/peer
+      name: etcd-peer-tls
+    - mountPath: /var/etcd/ssl/client
+      name: etcd-client-tls
+  volumes:
+  - name: etcd-server-tls
+    secret:
+      defaultMode: 420
+      secretName: etcd-server
+  - name: etcd-peer-tls
+    secret:
+      defaultMode: 420
+      secretName: etcd-peer
+  - name: etcd-client-tls
+    secret:
+      defaultMode: 420
+      secretName: etcd-client
