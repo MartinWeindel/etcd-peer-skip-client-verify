@@ -3,9 +3,9 @@
 On initialising the peer-to-peer communication, ETCD checks the CN/SAN for the client side. This is not feasible, if the client IP address (of the HTTPS connection) is not stable or unknown at the time of creation of the certificate.
 
 This project provides a test environment to demonstrate the problem.
-For this purpose, three ETCD servers are installed in Kubernetes and made available as K8s services.
-Each ETCD server is running in a K8s pod and is made visible to the other ETCD servers via their
-service IP address. Althought this setup is not our production setup, it shows the same characteristics: The ETCD servers are running in different networks with NAT translation.
+For this purpose, a cluster of three ETCD servers is installed in Kubernetes. The servers are made available as K8s services, i.e.
+the ClusterIP address of their services. This is a simulation of a realistic setup, e.g. the ETCD are running in different Kubernetes clusters and see each other only through the load balanced service.
+In this test setup, it shows the same characteristics: the IP address of the ETCD server (pod IP) is different from the IP address seen by the peer members.
 
 ## Prerequistes
 
@@ -15,7 +15,7 @@ For installation you need a Kubernetes cluster, e.g. using Docker and [kind](htt
 
 For this purpose, we use an own image containing the ETCD pull request [#10524](https://github.com/etcd-io/etcd/pull/10524/):
 
-1. Start a Kubernetes cluster with kind (optional)
+1. Start a Kubernetes cluster with kind (or setup an environment with Kubernetes yourself)
 
     ```bash 
     kind create cluster
@@ -29,11 +29,7 @@ For this purpose, we use an own image containing the ETCD pull request [#10524](
     ./deploy-peer-skip-client-san-verification.sh
     ```
 
-    This starts ETCD with following command line
-
-    ```
-    
-    ```
+    To view the command line for starting ETCD, see pod specification at [manifest/pod-etcd1-skip.yaml](./manifests/pod-etcd1-skip.yaml)
 
 3. Show logs of an ETCD server to verify successful startup
 
@@ -41,7 +37,7 @@ For this purpose, we use an own image containing the ETCD pull request [#10524](
     kubectl logs etcd3
     ```
 
-    See checked in log output [./logs_pod_etcd3_deploy-peer-skip-client-san-verification.txt](./logs_pod_etcd3_deploy-peer-skip-client-san-verification.txt) for typical output
+    A typical log output will look like [./logs_pod_etcd3_deploy-peer-skip-client-san-verification.txt](./logs_pod_etcd3_deploy-peer-skip-client-san-verification.txt)
 
 4. Cleanup with
 
@@ -50,7 +46,7 @@ For this purpose, we use an own image containing the ETCD pull request [#10524](
     kind delete cluster
     ```
 
-## Deploy standard ETCD without skip
+## Deploy without skip flag
 
 Same as above, but in step 2 use
 
@@ -58,9 +54,9 @@ Same as above, but in step 2 use
 ./deploy-noskip.sh
 ```
 
-The only effective difference is the missing `--peer-skip-client-verify=true` option on starting ETCD.
+See pod specification at [manifest/pod-etcd1-noskip.yaml](./manifests/pod-etcd1-noskip.yaml)
 
-See checked in log output [./logs_pod_etcd3_deploy-noskip.txt](./logs_pod_etcd3_deploy-noskip.txt) for typical output with showing problems like
+The typical log output (see [./logs_pod_etcd3_deploy-noskip.txt](./logs_pod_etcd3_deploy-noskip.txt)) shows problems like
 
 ```txt
 ...
